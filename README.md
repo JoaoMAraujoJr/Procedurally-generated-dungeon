@@ -55,6 +55,8 @@ Para que a simulação seja fidedigna, o algoritmo **A*** possui pesos dinâmico
 # # # # # # # # # #
 ```
 ## Screenshots:
-![Preview da Dungeon](screenshot_1.png)
-![Preview da Dungeon](screenshot_2.png)
-![Preview da Dungeon](screenshot_3.png)
+<p align="center">
+  <img src="screenshot 1.png" width="300" alt="Dungeon Preview 1">
+  <img src="screenshot 2.png" width="300" alt="Dungeon Preview 2">
+  <img src="screenshot 3.png" width="300" alt="Dungeon Preview 3">
+</p>
