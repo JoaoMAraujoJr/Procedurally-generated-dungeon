@@ -1,4 +1,4 @@
-# Dungeon Procedurl
+# Dungeon Procedural
 
 Este projeto da primeira unidade visa implementar um sistema de geração procedural de masmorras utilizando algoritmos de caminhada aleatória, análise de adjacência para estruturas arquitetônicas e um agente inteligente capaz de validar a jogabilidade do mapa antes do início da partida.
 
