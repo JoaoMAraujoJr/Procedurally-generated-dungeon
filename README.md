@@ -1,6 +1,6 @@
-# Procedural Dungeon Generator & AI Agent Simulation
+# Dungeon Procedurl
 
-Este projeto implementa um sistema de geração procedural de masmorras utilizando algoritmos de caminhada aleatória, análise de adjacência para estruturas arquitetônicas e um agente inteligente capaz de validar a jogabilidade do mapa antes do início da partida.
+Este projeto da primeira unidade visa implementar um sistema de geração procedural de masmorras utilizando algoritmos de caminhada aleatória, análise de adjacência para estruturas arquitetônicas e um agente inteligente capaz de validar a jogabilidade do mapa antes do início da partida.
 
 ## Técnicas de Geração Procedural
 
@@ -20,7 +20,7 @@ O fluxo de criação segue uma política de **"Gere até ser Válido"**:
 * **Fase 4: Spawn do Agente:** O agente é posicionado no local de maior custo de caminho em relação à saída, incentivando a exploração total.
 * **Fase 5: Validação (Simulação):** Antes da renderização visual, um agente virtual executa uma simulação completa. Se o agente morrer ou ficar preso por falta de acesso a uma chave, o mapa é descartado e um novo é gerado.
 
-## 🤖 Comportamento do Agente (IA de Simulação)
+## Comportamento do Agente (IA de Simulação)
 
 O comportamento do agente é regido por uma **Máquina de Estados de Prioridade** combinada com o algoritmo de busca **A* (A-Star)**:
 
@@ -42,7 +42,7 @@ Para que a simulação seja fidedigna, o algoritmo **A*** possui pesos dinâmico
 ## Tecnologias
 * **Godot Engine 4.x**
 * **GDScript** (Lógica de matrizes e algoritmos de busca)
-* **A* Pathfinding** customizado para grafos dinâmicos
+* **A* para Pathfinding** customizado 
 
 ---
 
@@ -55,3 +55,6 @@ Para que a simulação seja fidedigna, o algoritmo **A*** possui pesos dinâmico
 # # # # # # # # # #
 ```
 ## Screenshots:
+![Preview da Dungeon](screenshot_1.png)
+![Preview da Dungeon](screenshot_2.png)
+![Preview da Dungeon](screenshot_3.png)
