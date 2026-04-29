@@ -49,9 +49,9 @@ Para que a simulação seja fidedigna, o algoritmo **A*** possui pesos dinâmico
 ### Exemplo de Representação na Matriz
 ```text
 # # # # # # # # # #
-# 0 . . # . . + # #  (0 = Agente, + = Chave)
+# 0 . . # . . . # #  (0 = Agente, + = Chave)
 # # # . # . # # # #
-# . . . H . . . X #  (H = Portão, X = Saída)
+# + . . H . . . X #  (H = Portão, X = Saída)
 # # # # # # # # # #
 ```
 ## Screenshots:
