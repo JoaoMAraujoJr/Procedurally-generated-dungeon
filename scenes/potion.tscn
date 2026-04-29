@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://catm0q4s4bmls"]
+
+[ext_resource type="Texture2D" uid="uid://bwejbr42ifnv3" path="res://sprites/potion.png" id="1_ym5ma"]
+
+[sub_resource type="GDScript" id="GDScript_ym5ma"]
+resource_name = "potion"
+script/source = "extends Node2D
+
+
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		Manager.potion_picked.emit()
+		queue_free()
+	pass # Replace with function body.
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ym5ma"]
+radius = 16.03122
+
+[node name="potion" type="Node2D" unique_id=1229855793]
+z_index = 1
+script = SubResource("GDScript_ym5ma")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=591442]
+texture_filter = 1
+texture = ExtResource("1_ym5ma")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1534328411]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=793573327]
+shape = SubResource("CircleShape2D_ym5ma")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

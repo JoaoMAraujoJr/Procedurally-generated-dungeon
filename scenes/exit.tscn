@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://b8k5t6lpd443a"]
+
+[ext_resource type="Texture2D" uid="uid://duvvdix2qw5e3" path="res://sprites/exit.png" id="1_l0aq0"]
+
+[sub_resource type="GDScript" id="GDScript_l0aq0"]
+resource_name = "exit"
+script/source = "extends Node2D
+
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		$CanvasLayer/AnimationPlayer.play_backwards(\"transition\")
+		await $CanvasLayer/AnimationPlayer.animation_finished
+		Manager.door_entered.emit()
+"
+
+[sub_resource type="Animation" id="Animation_uyw7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 324)]
+}
+
+[sub_resource type="Animation" id="Animation_l0aq0"]
+resource_name = "transition"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("top:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -336)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 324), Vector2(0, 691)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uyw7u"]
+_data = {
+&"RESET": SubResource("Animation_uyw7u"),
+&"transition": SubResource("Animation_l0aq0")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyw7u"]
+size = Vector2(24, 25)
+
+[node name="exit" type="Node2D" unique_id=74311304]
+z_index = 1
+script = SubResource("GDScript_l0aq0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=592857834]
+texture_filter = 1
+texture = ExtResource("1_l0aq0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1694416759]
+
+[node name="top" type="ColorRect" parent="CanvasLayer" unique_id=281243358]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -323.99915
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="bot" type="ColorRect" parent="CanvasLayer" unique_id=1865419580]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 324.0
+offset_bottom = 0.0007324219
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=1333946559]
+libraries/ = SubResource("AnimationLibrary_uyw7u")
+autoplay = &"transition"
+
+[node name="Area2D" type="Area2D" parent="." unique_id=204187684]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=238448073]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_uyw7u")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

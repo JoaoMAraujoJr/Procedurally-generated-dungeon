@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cskkau1hvidw3"]
+
+[ext_resource type="Script" uid="uid://t774ax4nbgdx" path="res://DugeonGenerator.gd" id="1_08e2k"]
+[ext_resource type="PackedScene" uid="uid://cfd65kkvcvcuv" path="res://scenes/DugeonTile.tscn" id="2_4q8jt"]
+[ext_resource type="Texture2D" uid="uid://hyxo1htfy1vj" path="res://sprites/tile_wall.png" id="3_y3hve"]
+
+[node name="DungeonGenerator" type="Node2D" unique_id=392818956]
+script = ExtResource("1_08e2k")
+dungeon_size = null
+tile_scene = ExtResource("2_4q8jt")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=715905945]
+scale = Vector2(1.2591426, 1.2591426)
+scroll_scale = Vector2(0.5, 0.5)
+scroll_offset = Vector2(32, 32)
+repeat_size = Vector2(32, 32)
+autoscroll = Vector2(1, 0)
+repeat_times = 65
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1374103574]
+modulate = Color(0.3714878, 0.3714878, 0.3714878, 1)
+texture_filter = 1
+texture = ExtResource("3_y3hve")

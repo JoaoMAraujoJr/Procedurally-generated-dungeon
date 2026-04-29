@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cfd65kkvcvcuv"]
+
+[ext_resource type="Script" uid="uid://bl7a5n1htohoy" path="res://scenes/dugeon_tile.gd" id="1_k4sk5"]
+[ext_resource type="PackedScene" uid="uid://bmoo57ml7tuy7" path="res://scenes/path.tscn" id="2_cj2ov"]
+[ext_resource type="PackedScene" uid="uid://ccemyby61e46b" path="res://scenes/wall.tscn" id="3_h0j1v"]
+[ext_resource type="PackedScene" uid="uid://catm0q4s4bmls" path="res://scenes/potion.tscn" id="4_cj2ov"]
+[ext_resource type="PackedScene" uid="uid://cveiogco0dr6s" path="res://scenes/enemy.tscn" id="5_cj2ov"]
+[ext_resource type="PackedScene" uid="uid://dnb5gshgbo5h0" path="res://scenes/chest.tscn" id="6_cj2ov"]
+[ext_resource type="PackedScene" uid="uid://b8k5t6lpd443a" path="res://scenes/exit.tscn" id="7_cj2ov"]
+[ext_resource type="PackedScene" uid="uid://cga860ki7k0o4" path="res://scenes/agentspawner.tscn" id="8_cj2ov"]
+[ext_resource type="PackedScene" uid="uid://br7sb34x5luv" path="res://scenes/gate.tscn" id="9_cqgri"]
+[ext_resource type="PackedScene" uid="uid://21qasxyopk7w" path="res://scenes/key.tscn" id="10_jgd42"]
+
+[node name="dungeon_tile" type="Node2D" unique_id=947554268]
+script = ExtResource("1_k4sk5")
+wall_scene = ExtResource("3_h0j1v")
+path_scene = ExtResource("2_cj2ov")
+potion_scene = ExtResource("4_cj2ov")
+player_scene = ExtResource("8_cj2ov")
+enemy_scene = ExtResource("5_cj2ov")
+exit_scene = ExtResource("7_cj2ov")
+chest_scene = ExtResource("6_cj2ov")
+gate_scene = ExtResource("9_cqgri")
+key_scene = ExtResource("10_jgd42")

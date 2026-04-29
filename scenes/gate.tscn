@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://br7sb34x5luv"]
+
+[ext_resource type="Texture2D" uid="uid://mrty1uqsh8x1" path="res://sprites/locked_door.png" id="1_xfvdi"]
+
+[sub_resource type="GDScript" id="GDScript_xfvdi"]
+resource_name = "gate"
+script/source = "extends StaticBody2D
+
+
+func _on_key_detector_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D and Manager.cur_keys >= 1:
+		Manager.cur_keys -=1
+		print(\"key used\")
+		queue_free()
+	else:
+		return
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwxio"]
+size = Vector2(26, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hudsw"]
+size = Vector2(38, 37)
+
+[node name="Gate" type="StaticBody2D" unique_id=1632526098]
+script = SubResource("GDScript_xfvdi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=332950844]
+texture_filter = 1
+texture = ExtResource("1_xfvdi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=134414953]
+shape = SubResource("RectangleShape2D_xwxio")
+debug_color = Color(0.89632106, 0.3179856, 0, 0.41960785)
+
+[node name="key detector" type="Area2D" parent="." unique_id=765064917]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="key detector" unique_id=1406875671]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hudsw")
+
+[connection signal="body_entered" from="key detector" to="." method="_on_key_detector_body_entered"]

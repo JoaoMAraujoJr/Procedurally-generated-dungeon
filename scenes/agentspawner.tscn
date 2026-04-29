@@ -1,0 +1,300 @@
+[gd_scene format=3 uid="uid://cga860ki7k0o4"]
+
+[ext_resource type="Texture2D" uid="uid://b7spfyvnwc7ew" path="res://sprites/knight.png" id="1_tprlb"]
+
+[sub_resource type="GDScript" id="GDScript_cj2ov"]
+resource_name = "player"
+script/source = "extends CharacterBody2D
+
+const SPEED = 100.0
+
+func _physics_process(delta: float) -> void:
+	var direction = Vector2.ZERO
+
+	direction.x = Input.get_axis(\"ui_left\", \"ui_right\")
+	direction.y = Input.get_axis(\"ui_up\", \"ui_down\")
+
+	# Normaliza pra não andar mais rápido na diagonal
+	if direction != Vector2.ZERO:
+		$AnimationPlayer.play(\"walking\")
+		direction = direction.normalized()
+	else:
+		$AnimationPlayer.play(\"idle\")
+
+	if direction.x > 0 :
+		$visuals/Sprite2D2.flip_h = true
+	elif direction.x < 0:
+		$visuals/Sprite2D2.flip_h = false
+	velocity = direction * SPEED
+	move_and_slide()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cj2ov"]
+radius = 14.0
+
+[sub_resource type="Curve" id="Curve_tprlb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9105691, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1rlwr"]
+curve = SubResource("Curve_tprlb")
+
+[sub_resource type="Curve" id="Curve_ev2s6"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 4), 0.0, 0.0, 0, 0, Vector2(0.3495935, 2.6926072), 0.0, 0.0, 0, 0, Vector2(0.4878049, 2.8793776), 0.0, 0.0, 0, 0, Vector2(1, 1.085603), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_3fjd3"]
+curve = SubResource("Curve_ev2s6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ecdp3"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -1, 0)
+radial_accel_min = 1.8499978
+radial_accel_max = 13.719997
+scale_curve = SubResource("CurveTexture_3fjd3")
+alpha_curve = SubResource("CurveTexture_1rlwr")
+turbulence_enabled = true
+
+[sub_resource type="Animation" id="Animation_aq0x0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("visuals:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("visuals:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qqn6n"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("visuals:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("visuals:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.16666667, 0.76666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.018238211, 0.018238211]
+}
+
+[sub_resource type="Animation" id="Animation_5cnon"]
+resource_name = "walking"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("visuals:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.36666667, 1.0666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.13962634, -0.13962634]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("visuals:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.74, 1.06, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.83), Vector2(1, 1), Vector2(1, 0.83), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gla8v"]
+_data = {
+&"RESET": SubResource("Animation_aq0x0"),
+&"idle": SubResource("Animation_qqn6n"),
+&"walking": SubResource("Animation_5cnon")
+}
+
+[sub_resource type="GDScript" id="GDScript_tprlb"]
+resource_name = "UI"
+script/source = "extends CanvasLayer
+
+@onready var hp:Label = $hp
+@onready var gold:Label = $gold
+@onready var lvl:Label= $lvl
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	hp.text = str(Manager.cur_life) + \" HP\"
+	gold.text = str(Manager.chests * 10) + \" $\"
+	lvl.text = \"FLOOR \"+str(Manager.level)
+"
+
+[sub_resource type="SystemFont" id="SystemFont_1rlwr"]
+font_names = PackedStringArray("Fantasy")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ev2s6"]
+font = SubResource("SystemFont_1rlwr")
+
+[node name="agentspawner" type="CharacterBody2D" unique_id=381501815]
+z_index = 2
+script = SubResource("GDScript_cj2ov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1621314375]
+shape = SubResource("CircleShape2D_cj2ov")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=579739814]
+zoom = Vector2(1.67, 1.67)
+position_smoothing_enabled = true
+
+[node name="visuals" type="Node2D" parent="." unique_id=2122596230]
+
+[node name="Sprite2D2" type="Sprite2D" parent="visuals" unique_id=1480261930]
+texture_filter = 1
+texture = ExtResource("1_tprlb")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=944629901]
+z_index = -1
+position = Vector2(0, 13)
+amount = 10
+lifetime = 3.0
+preprocess = 1.0
+explosiveness = 0.65
+randomness = 0.03
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_ecdp3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2047797207]
+libraries/ = SubResource("AnimationLibrary_gla8v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=219375306]
+script = SubResource("GDScript_tprlb")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1082803187]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -550.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="hp" type="Label" parent="CanvasLayer" unique_id=291450319]
+offset_left = 21.0
+offset_top = 30.0
+offset_right = 70.0
+offset_bottom = 53.0
+scale = Vector2(1.334899, 1.334899)
+text = "HP "
+label_settings = SubResource("LabelSettings_ev2s6")
+
+[node name="gold" type="Label" parent="CanvasLayer" unique_id=429771487]
+offset_left = 171.0
+offset_top = 30.0
+offset_right = 220.0
+offset_bottom = 53.0
+scale = Vector2(1.334899, 1.334899)
+text = "$"
+label_settings = SubResource("LabelSettings_ev2s6")
+
+[node name="lvl" type="Label" parent="CanvasLayer" unique_id=1554878871]
+offset_left = 1026.0
+offset_top = 30.0
+offset_right = 1078.0
+offset_bottom = 53.0
+scale = Vector2(1.334899, 1.334899)
+text = "FLOOR"
+label_settings = SubResource("LabelSettings_ev2s6")

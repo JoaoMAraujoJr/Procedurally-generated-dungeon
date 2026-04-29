@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bmoo57ml7tuy7"]
+
+[ext_resource type="Texture2D" uid="uid://co5jfjrwlvttd" path="res://sprites/tile_path.png" id="1_1dods"]
+
+[node name="path" type="Node2D" unique_id=781893709]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1279507182]
+texture_filter = 1
+texture = ExtResource("1_1dods")

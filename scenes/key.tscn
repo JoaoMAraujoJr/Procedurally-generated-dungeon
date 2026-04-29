@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://21qasxyopk7w"]
+
+[ext_resource type="Texture2D" uid="uid://cfm7nsw5d8lei" path="res://sprites/key.png" id="1_yk2u2"]
+
+[sub_resource type="GDScript" id="GDScript_yk2u2"]
+resource_name = "key"
+script/source = "extends Node2D
+
+
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		Manager.cur_keys +=1
+		print(\"key picked\")
+		queue_free()
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fttkb"]
+radius = 16.0
+
+[node name="key" type="Node2D" unique_id=1526906107]
+z_index = 2
+script = SubResource("GDScript_yk2u2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=694956399]
+z_index = 2
+texture_filter = 1
+texture = ExtResource("1_yk2u2")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=20917441]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1177543965]
+shape = SubResource("CircleShape2D_fttkb")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
